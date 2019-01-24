@@ -4,9 +4,10 @@ class GroovyTut{
     def age = "Dog";
     println(age)
 
-    // Regular numnbers and
+    // Regular numbers
     println('5 + 4 = ' + (5 + 4));
     println('5 - 4 = ' + (5 - 4));
     println('5 / 2 = ' + (5.intdiv(2)));
+
   }
 }

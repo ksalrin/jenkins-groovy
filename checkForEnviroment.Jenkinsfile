@@ -1,7 +1,5 @@
 #!groovy
 
-
-import hudson.model.*
 def tmpDir = 'nexus'
 
 if (params.DEPLOY_ENV != null && params.DEPLOY_ENV.equals('dev')){
@@ -19,6 +17,7 @@ if (params.DEPLOY_ENV != null && params.DEPLOY_ENV.equals('dev')){
 node {
   if(fileExists("${tmpDir}")) {
       stage("Archiving Results")
+
       def tmpFile = "cassandra.txt.${env.BUILD_ID}"
       dir("${tmpDir}") {
           writeFile file: "${tmpFile}", text: 'example\n'

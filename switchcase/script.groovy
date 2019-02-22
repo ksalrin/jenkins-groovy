@@ -9,14 +9,18 @@ newProperties = [
 if (newProperties['debug']) {
   switch (newProperties['debug'][0]) {
       case 'true':
-          builddata['tag'].add('qa')
-          builddata['tag'].add('dev')
-          break
+          if (newProperties['release'][0] == 'false'){
+            builddata['tag'].add('qa')
+            builddata['tag'].add('dev')
+            break
+          }
       case 'false':
-          builddata['tag'].add('stage')
-          builddata['tag'].add('qa')
-          builddata['tag'].add('prod')
-          break
+          if (newProperties['release'][0] == 'true'){
+            builddata['tag'].add('stage')
+            builddata['tag'].add('qa')
+            builddata['tag'].add('prod')
+            break
+          }
       default:
           println('Tag should exist on builddata')
   }
@@ -25,8 +29,11 @@ if (newProperties['debug']) {
 }
 
 
-if ( 'stage' in builddata['tag'][0]) {
+if ( 'stage' in builddata['tag']) {
   println('This will go to prod')
 }
 
-// println(builddata)
+
+if ( 'dev' in builddata['tag']) {
+  println('This will go to qa')
+}

@@ -23,17 +23,8 @@ class myExampleClass {
      }
    }
 
-   def deleteFromList(list, name) {
-     list.each() {
-       if (it == name){
-         list.remove(name)
-       }
-     }
-   }
 }
 
-new myExampleClass().printName('Farkhod')
+// new myExampleClass().printName('Farkhod')
 
 new myExampleClass().printFromList(dataList)
-
-new myExampleClass().deleteFromList(dataList, 'Anna')

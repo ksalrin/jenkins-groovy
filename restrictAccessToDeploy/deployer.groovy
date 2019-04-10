@@ -1,8 +1,15 @@
-import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy
+import jenkins.model.Jenkins
+import hudson.model.User
 
-def authStrategy = Jenkins.instance.getAuthorizationStrategy()
+allUsers = User.getAll()
+adminList = []
+authStrategy = Jenkins.instance.getAuthorizationStrategy()
+def allowedGroup = ['admin', 'deploy', 'deployer']
 
 node {
+  allUsers.each() {
+    println(it)
+  }
 
   stage('test') {
     echo 'Hello'

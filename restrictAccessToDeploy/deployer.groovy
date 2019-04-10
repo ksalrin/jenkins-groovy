@@ -5,11 +5,12 @@ allUsers = User.getAll()
 adminList = []
 authStrategy = Jenkins.instance.getAuthorizationStrategy()
 def allowedGroup = ['admin', 'deploy', 'deployer']
+allUsers.each() {
+  println(it)
+}
 
 node {
-  allUsers.each() {
-    println(it)
-  }
+
 
   stage('test') {
     echo 'Hello'

@@ -9,3 +9,9 @@ def existingGroups = authStrategy.getGroups()
 existingGroups.each() {
   println(it)
 }
+
+
+def existingInstance = authStrategy.getInstance()
+existingInstance.each() {
+  println(it)
+}

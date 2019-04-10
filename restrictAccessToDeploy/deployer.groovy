@@ -11,7 +11,7 @@ existingGroups.each() {
 }
 
 
-def existingInstance = authStrategy.getInstance()
-existingInstance.each() {
+def existingRoles = authStrategy.doGetAllRoles()
+existingRoles.each() {
   println(it)
 }

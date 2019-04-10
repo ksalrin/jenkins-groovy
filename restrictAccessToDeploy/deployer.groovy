@@ -1,18 +1,8 @@
 import jenkins.model.Jenkins
 import hudson.model.User
 
-allUsers = User.getAll()
-adminList = []
-authStrategy = Jenkins.instance.getAuthorizationStrategy()
-def allowedGroup = ['admin', 'deploy', 'deployer']
-allUsers.each() {
-  println(it)
-}
+def allUsers = User.getAll()
+def adminList = []
+def authStrategy = Jenkins.instance.getAuthorizationStrategy()
 
-node {
-
-
-  stage('test') {
-    echo 'Hello'
-  }
-}
+def existingGroups = authStrategy.getGroups()

@@ -1,9 +1,9 @@
 import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy
 
-
+def authStrategy = Jenkins.instance.getAuthorizationStrategy()
 
 node {
-  def authStrategy = Jenkins.instance.getAuthorizationStrategy()
+
   stage('test') {
     echo 'Hello'
   }

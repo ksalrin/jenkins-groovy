@@ -6,3 +6,6 @@ def adminList = []
 def authStrategy = Jenkins.instance.getAuthorizationStrategy()
 
 def existingGroups = authStrategy.getGroups()
+existingGroups.each() {
+  println(it)
+}

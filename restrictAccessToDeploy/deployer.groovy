@@ -4,14 +4,5 @@ import hudson.model.User
 def allUsers = User.getAll()
 def adminList = []
 def authStrategy = Jenkins.instance.getAuthorizationStrategy()
-
+def usersGroups = ['menu']
 def existingGroups = authStrategy.getGroups()
-existingGroups.each() {
-  println(it)
-}
-
-
-def existingRoles = authStrategy.doGetAllRoles('admin')
-existingRoles.each() {
-  println(it)
-}

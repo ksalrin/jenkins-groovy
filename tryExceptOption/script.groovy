@@ -14,7 +14,11 @@ try {
 println("jenkins-pipeline-${UUID.randomUUID().toString()}")
 
 
+
+println("jenkins-pipeline-${UUID.randomUUID().toString().split('-')[0]}")
+
+
 def data = 'webplatform-fuchicorp-deploy/fsadykov'
 branchName = data.split('/').last()
 
-println(newdata)
+println(branchName)

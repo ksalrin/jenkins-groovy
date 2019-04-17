@@ -1,7 +1,5 @@
 import groovy.json.JsonSlurper
 
-def myJsonreader = new JsonSlurper()
-
 
 def findDockerImages(branchName) {
 
@@ -18,4 +16,4 @@ def findDockerImages(branchName) {
 }
 
 
-println(findDockerImages('dev'))
+println(findDockerImages('qa'))

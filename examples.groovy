@@ -26,3 +26,10 @@ data.put("Farkhod", "kaakashka")
 
 
 exampleOfDictionaryFunction(data)
+
+
+def returnAsString(int data) {
+  return data
+}
+
+println(returnAsString(234).toString().class)

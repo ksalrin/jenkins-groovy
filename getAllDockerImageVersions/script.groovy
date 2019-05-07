@@ -12,8 +12,14 @@ def findDockerImages(branchName) {
        versionList.add(it.name + ':' + it.version)
     }
   }
+
+  if (versionList.isEmpty()) {
+    return ['none']
+  }
+
   return versionList
 }
 
 
-println(findDockerImages('qa'))
+println(findDockerImages('dev'))
+// choice(name: 'SelectedDockerImage', choices: findDockerImages(branch), description: 'Please select docker image to deploy!')

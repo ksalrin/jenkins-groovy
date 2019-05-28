@@ -5,7 +5,7 @@ def credId  = scm.getUserRemoteConfigs()[0].getCredentialsId()
 // def repo = 'https://github.com/fsadykov/keep-creds.git'.replace('https://', '')
 
 
-String repoUrl = project.getDefinition().getScm().getUserRemoteConfigs()[0].getUrl()
+String repoUrl = scm.getUserRemoteConfigs()[0].getUrl()
 
 node('master') {
 

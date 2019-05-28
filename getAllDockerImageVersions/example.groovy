@@ -1,14 +1,8 @@
 
-
-node('master') {
-    properties([ parameters([
-      choice(name: 'SelectedDockerImage',
-      choices: findDockerImages('dev'),
-      description: 'Please select docker image to deploy!')
-      ])])
+// GET
+def get = new URL("http://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform").openConnection();
+def getRC = get.getResponseCode();
+println(get.getInputStream().getText());
+if(getRC.equals(200)) {
+    println(get.getInputStream().getText());
 }
-
-
-
-
-println(example('farkhod'))

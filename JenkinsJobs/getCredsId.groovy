@@ -1,10 +1,6 @@
 
 
 def credId  = scm.getUserRemoteConfigs()[0].getCredentialsId()
-
-// def repo = 'https://github.com/fsadykov/keep-creds.git'.replace('https://', '')
-
-
 String repoUrl = scm.getUserRemoteConfigs()[0].getUrl().replace('https://', '')
 
 node('master') {
@@ -15,9 +11,8 @@ node('master') {
   usernameVariable: 'GIT_USERNAME',
   passwordVariable: 'GIT_PASSWORD']]) {
     dir("${WORKSPACE}/") {
-      sh 'rm -rf keep-creds'
-      sh("git clone https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${repoUrl} ")
-      sh "ls -la "
+      sh("git tag -a some_tag -m 'Jenkins'")
+      sh("git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${repoUrl} --tags")
     }
   }
 }

@@ -1,5 +1,8 @@
-def scmCredsID
-node {
-  scmCredsID = scm.getUserRemoteConfigs()[0].getCredentialsId()
-  println(scmCredsID)
+
+
+def credId  = scm.getUserRemoteConfigs()[0].getCredentialsId()
+
+
+node('master') {
+  echo "${credId}"
 }

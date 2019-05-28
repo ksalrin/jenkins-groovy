@@ -2,7 +2,7 @@
 
 def credId  = scm.getUserRemoteConfigs()[0].getCredentialsId()
 
-def repo = 'https://github.com/fsadykov/keep-creds.git'
+def repo = 'https://github.com/fsadykov/keep-creds.git'.replace('https', '')
 
 node('master') {
   echo "${credId}"

@@ -10,6 +10,10 @@ node('master') {
   credentialsId: "${credId}",
   usernameVariable: 'GIT_USERNAME',
   passwordVariable: 'GIT_PASSWORD']]) {
-    sh("git clone https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${repo}")
+    dir("${WORKSPACE}/") {
+      sh("git clone https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${repo}")
+      sh "ls -la "
+    }
+
   }
 }

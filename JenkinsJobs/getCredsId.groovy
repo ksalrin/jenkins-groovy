@@ -11,9 +11,9 @@ node('master') {
   usernameVariable: 'GIT_USERNAME',
   passwordVariable: 'GIT_PASSWORD']]) {
     dir("${WORKSPACE}/") {
-      sh("git clone https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${repo}")
+      sh 'rm -rf keep-creds'
+      sh("git clone https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${repo} --ove")
       sh "ls -la "
     }
-
   }
 }

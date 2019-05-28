@@ -4,6 +4,7 @@ def credId  = scm.getUserRemoteConfigs()[0].getCredentialsId()
 String repoUrl = scm.getUserRemoteConfigs()[0].getUrl().replace('https://', '')
 
 node('master') {
+  checkout scm
 
   echo "${credId}"
   withCredentials([[$class: 'UsernamePasswordMultiBinding',

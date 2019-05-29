@@ -14,5 +14,5 @@ node('master') {
     }
   }
 
-  println("${BUILD_DATE}")
+  println("${BUILD_TAG}")
 }

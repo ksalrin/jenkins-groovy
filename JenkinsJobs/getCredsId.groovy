@@ -1,4 +1,4 @@
-
+import java.text.SimpleDateFormat
 
 def credId  = scm.getUserRemoteConfigs()[0].getCredentialsId()
 String repoUrl = scm.getUserRemoteConfigs()[0].getUrl().replace('https://', '')

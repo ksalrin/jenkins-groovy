@@ -1,8 +1,29 @@
+import groovy.json.JsonSlurper
 
-// GET
-def get = new URL("http://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform").openConnection();
-def getRC = get.getResponseCode();
-println(get.getInputStream().getText());
-if(getRC.equals(200)) {
-    println(get.getInputStream().getText());
+def findDockerImages(branchName) {
+  def versionList = []
+  def myJsonreader = new JsonSlurper()
+  def nexusData = myJsonreader.parse(new URL("https://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform"))
+  nexusData.items.each {
+    if (it.name.contains(branchName)) {
+       versionList.add(it.name + ':' + it.version)
+     }
+    }
+
+
+  if (versionList.isEmpty()) {
+    return ['ImageNotFound']
+  }
+
+  return versionList
+}
+
+println(findDockerImages('dev'))
+println(findDockerImages('prod'))
+println(findDockerImages('qa'))
+
+def data = 'tools'
+
+if (data != 'tools') {
+  println('Does not work')
 }

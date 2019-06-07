@@ -40,7 +40,7 @@ Object sendMessage(String type, String message, String status, String channel) {
 }
 
 
-Object slackSend(object = [Map channel, Map color, Map baseUrl, Map slackToken, Map message]) {
+Object slackSend(object = [ Map channel, Map color, Map baseUrl, Map slackToken, Map message]) {
 
   println(object)
 

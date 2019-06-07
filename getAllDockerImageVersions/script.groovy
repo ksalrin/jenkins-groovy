@@ -3,21 +3,32 @@ import groovy.json.JsonSlurper
 //
 def findDockerImages(branchName) {
   def versionList = []
+  def token       = ""
   def myJsonreader = new JsonSlurper()
   def nexusData = myJsonreader.parse(new URL("https://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform"))
-  nexusData.items.each {
-    if (it.name.contains(branchName)) {
-       versionList.add(it.name + ':' + it.version)
-     }
+  while (true) {
+    if (nexusData.continuationToken) {
+      nexusData.items.each {
+        if (it.name.contains(branchName)) {
+           versionList.add(it.name + ':' + it.version)
+         }
+        }
+      token = nexusData.continuationToken
+      nexusData = myJsonreader.parse(new URL("https://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform&continuationToken=${token}"))
+      nexusData.items.each {
+        if (it.name.contains(branchName)) {
+           versionList.add(it.name + ':' + it.version)
+         }
+        }
+    }
+    if (nexusData.continuationToken == null ){
+      break
     }
 
-
-  if (versionList.isEmpty()) {
-    return ['ImageNotFound']
   }
+
 
   return versionList
 }
 
-println(findDockerImages('qa'))
-// choice(name: 'SelectedDockerImage', choices: findDockerImages(branch), description: 'Please select docker image to deploy!')
+println(findDockerImages('dev'))

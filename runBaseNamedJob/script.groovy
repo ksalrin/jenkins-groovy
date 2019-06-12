@@ -6,6 +6,8 @@ node('master') {
         .replace(" ", "-")
         .replace(".net", "dotnet")
 
+  println(jobName)
+
   if (jobName.contains('base')) {
     println('Hello works')
   }

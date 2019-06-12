@@ -9,13 +9,12 @@ node('master') {
   println(jobName)
 
   if (jobName.contains('base')) {
-    println('Hello works')
+    properties([[$class: 'RebuildSettings',
+    autoRebuild: false,
+    rebuildDisabled: false],
+    pipelineTriggers([cron('''47 20 * * *''')])])
   }
 
-  properties([[$class: 'RebuildSettings',
-  autoRebuild: false,
-  rebuildDisabled: false],
-  pipelineTriggers([cron('''47 20 * * *''')])])
   stage('poll Code') {
 
     checkout scm
@@ -24,5 +23,6 @@ node('master') {
   stage('cheking') {
     sh "ls ${WORKSPACE}"
   }
+
 
 }

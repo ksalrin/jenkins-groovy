@@ -5,7 +5,7 @@ node('master') {
   properties([[$class: 'RebuildSettings',
   autoRebuild: false,
   rebuildDisabled: false],
-  pipelineTriggers([cron('''41 15 * * *''')])])
+  pipelineTriggers([cron('''47 20 * * *''')])])
   stage('poll Code') {
 
     checkout scm

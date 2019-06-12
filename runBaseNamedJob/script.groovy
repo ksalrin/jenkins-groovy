@@ -1,7 +1,7 @@
 
 
 node('master') {
-  def jobName = "${JOB_BASE_NAME}"
+  def jobName = "${JOB_NAME}"
         .toLowerCase()
         .replace(" ", "-")
         .replace(".net", "dotnet")

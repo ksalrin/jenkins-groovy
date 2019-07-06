@@ -6,6 +6,8 @@ import groovy.json.JsonSlurper
 // # http://fuchicorp.com/api/users
 
 
+
+
 def findUser(username) {
 
   def userList = []

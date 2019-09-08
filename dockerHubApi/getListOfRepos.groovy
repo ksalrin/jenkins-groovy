@@ -27,4 +27,4 @@ def findDockerImages(nameApp) {
   return repoVersions.sort()
 }
 
-println(findDockerImages('cloud'))
+println(findDockerImages('fuchicorp-monitor'))

@@ -1,0 +1,10 @@
+---
+version: 0.1
+docker:
+  - name: Docker
+    path: Docker
+    lang: docker
+deployments:
+  deployment:
+    path: terraform_deployment
+lambda: []

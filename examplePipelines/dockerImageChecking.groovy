@@ -9,7 +9,7 @@ node {
   def mapdata.data = 'Example Data'
   stage('Check') {
     def jsonReader = new JsonSlurper()
-    def dataFromUrl = jsonReader.parse( new URL('http://nexus.fscoding.com/service/rest/v1/components?repository=fscoding') )
+    def dataFromUrl = jsonReader.parse( new URL('http://docker.fuchicorp.com/service/rest/v1/components?repository=fscoding') )
     def versions = dataFromUrl.items.version
 
     if (dataFromUrl.items.version.contains(newVersion)) {

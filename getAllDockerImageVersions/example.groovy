@@ -10,24 +10,21 @@ def findDockerImages(branchName) {
     if (nexusData.continuationToken) {
       nexusData.items.each {
         if (it.name.contains(branchName)) {
-           versionList.add(it.name + ':' + it.version)
+           versionList.add('docker.fuchicorp.com/'  +it.name + ':' + it.version)
          }
         }
       token = nexusData.continuationToken
       nexusData = myJsonreader.parse(new URL("https://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform&continuationToken=${token}"))
       nexusData.items.each {
         if (it.name.contains(branchName)) {
-           versionList.add(it.name + ':' + it.version)
+           versionList.add('docker.fuchicorp.com/'  + it.name + ':' + it.version)
          }
         }
     }
     if (nexusData.continuationToken == null ){
       break
     }
-
   }
-
-
   return versionList
 }
 

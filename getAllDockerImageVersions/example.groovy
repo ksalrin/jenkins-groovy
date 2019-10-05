@@ -6,25 +6,13 @@ def findDockerImages(branchName) {
   def token       = ""
   def myJsonreader = new JsonSlurper()
   def nexusData = myJsonreader.parse(new URL("https://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform"))
-  while (true) {
-    if (nexusData.continuationToken) {
-      nexusData.items.each {
-        if (it.name.contains(branchName)) {
-           versionList.add('docker.fuchicorp.com/'  +it.name + ':' + it.version)
-         }
-        }
-      token = nexusData.continuationToken
-      nexusData = myJsonreader.parse(new URL("https://nexus.fuchicorp.com/service/rest/v1/components?repository=webplatform&continuationToken=${token}"))
-      nexusData.items.each {
-        if (it.name.contains(branchName)) {
-           versionList.add('docker.fuchicorp.com/'  + it.name + ':' + it.version)
-         }
-        }
-    }
-    if (nexusData.continuationToken == null ){
-      break
+  println('nexusData'.'items'.'id')
+  nexusData.items.assets.downloadUrl.each() {
+    if ( it[0] == "https://nexus.fuchicorp.com/repository/webplatform/v2/artemis-dev/manifests/0.3") {
+      versionList.add(it)
     }
   }
+
   return versionList
 }
 

@@ -33,7 +33,6 @@ boolean isLibrariesEqual(List lib1, List lib2) {
     )
 }
 
-
 pipeline_shared_libraries = [
     'CommonLib': [
         'defaultVersion': 'master',
@@ -53,7 +52,7 @@ if(!binding.hasVariable('pipeline_shared_libraries')) {
 }
 
 if(!pipeline_shared_libraries in Map) {
-    throw new Exception("pipeline_shared_libraries must be an instance of Map but instead is instance of: ${pipeline_shared_libraries.getClass()}")
+    throw new Exception("pipeline_shared_libraries must be an instance of Map but instead is instance of: "+ pipeline_shared_libraries.getClass())
 }
 
 pipeline_shared_libraries = pipeline_shared_libraries as JSONObject

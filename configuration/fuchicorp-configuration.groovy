@@ -195,7 +195,7 @@ def getTeamMembers(teamName) {
 
 def devopTeam = getTeamMembers("devops")
 def orgMembers = getTeamMembers("members")
-
+def devMembers = getTeamMembers("Dev")
 /**
  *                Roles
  */
@@ -208,8 +208,8 @@ def globalRoleAdmin = "admin"
  *           Users and Groups
  */
 def access = [
-  admins: devopTeam,// Using DevOps team from FuchiCorp organization
-  builders: [],
+  admins: devopTeam,
+  builders: devMembers,
   readers: orgMembers
 ]
 

@@ -48,5 +48,5 @@ def getTeamMembers(teamName) {
 }
 
 println("DevOps Members: ${getTeamMembers('devops')}")
-println("Admin Members: ${getTeamMembers('admin')}")
-println("Members: ${getTeamMembers('members')}")
+// println("Admin Members: ${getTeamMembers('admin')}")
+// println("Members: ${getTeamMembers('members')}")

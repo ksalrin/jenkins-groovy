@@ -1,0 +1,140 @@
+---
+MetaData:
+  EnvironmentSegment: Non-Prod
+Core:
+  Infrastructure:
+    All:
+      core-gls-ingest-infra-common: default
+      core-dotnetcore-container-rest-bridge-restaurant-configuration: default
+  Deployment:
+    GLS_Pre:
+      core-java-container-gls-microservice-ingest: default
+    GLS_Stack:
+      core-java-container-gls-microservice-ingest: default
+      core-java-container-gls-ingest-file-adapter: default
+      core-java-container-configuration-update-watcher: default
+      core-java-container-gls-microservice-search-api: default
+    RS_Stack:
+      core-java-container-rest-proxy: default
+      core-java-container-pilot-service: default
+    Middleware:
+      core-mule-cloudhub-proxy-secure-token-service: default
+      core-mule-cloudhub-proxy-secure-token-service-externalprovider: default
+      core-mule-cloudhub-proxy-configuration-exp-api: default # erros in nulesoft logs but application green
+      core-mule-cloudhub-proxy-nutrition-exp-api: default
+      core-mule-cloudhub-proxy-nutrition-sys-api: default
+      core-mule-cloudhub-proxy-restaurant-exp-api: default
+      core-mule-cloudhub-proxy-restaurant-prc-api: default
+      core-mule-cloudhub-proxy-notification-exp-api: default # Deployment timed out. Tried second run and deployment completed but applicationStatus says  undeployed || CORES-6370
+      core-mule-cloudhub-proxy-mdm-ingest: default
+      core-mule-cloudhub-proxy-restaurant-passive-exp-api: default
+    FOE_Emulator:
+      core-dotnetcore-container-rest-foe-emu: default
+    Restaurant_Bridge:
+      core-dotnetcore-container-rest-bridge-proxy-premise: default
+      core-dotnetcore-container-rest-bridge-restaurant-monitor: default
+      core-dotnetcore-container-rest-bridge-cache-rfmxml-databases: default
+      core-dotnetcore-container-rest-bridge-cache-parsed-settings: default
+      core-dotnetcore-container-rest-bridge-cache-parsed-promotions: default
+      core-dotnetcore-container-rest-bridge-cache-parsed-products: default
+      core-dotnetcore-container-rest-bridge-cache-parsed-product-outages: default
+      core-dotnetcore-container-rest-bridge-cache-parsed-menu-categories: default
+      core-dotnetcore-container-rest-bridge-cache-parsed-details: default
+      core-dotnetcore-container-rest-bridge-gateway-cloud: default
+    GMA:
+      core-dotnetcore-container-rest-catalog: default #OK, but fetching output maybe required https://us-confluence.mcd.com/display/CRT/Restaurant+Bridge+Deployment+Activities
+      core-dotnetcore-container-rest-info: default #OK, but fetching output maybe required https://us-confluence.mcd.com/display/CRT/Restaurant+Bridge+Deployment+Activities
+      core-dotnetcore-container-rest-prom-adv: default #OK, but fetching output maybe required https://us-confluence.mcd.com/display/CRT/Restaurant+Bridge+Deployment+Activities
+    OTHER:
+      core-java-container-notification-sub-api: default
+      core-mule-cloudhub-proxy-notification-exp-api: default
+      core-mule-cloudhub-proxy-restaurant-passive-exp-api: default
+
+Account:
+  Infrastructure:
+    All:
+      accounts-infrastructure-auroradb: master # use master branch
+      accounts-infrastructure-auroradb-dms: master
+      accounts-infrastructure-common: master
+      accounts-infrastructure-dynamodb: master
+      accounts-infrastructure-sqs: master
+    Load:
+      accounts-load-auroradb: master # dependant on accounts-infrastructure-auroradb (use master branch)
+
+  Deployment:
+    All:
+      # accounts-java-container-app-favorite: default # Not required for back to green
+      accounts-java-container-dcs-admin-ui: default
+      accounts-java-container-dcs-ecp-id-mapping: default
+      # accounts-java-container-profile-bulk-update: default  # Not required for back to green
+      accounts-java-lambda-crds-auth-proxy: default # missing s3_bucket.policy in remote state. accounts-java-container-acs-event-proxy-location needs creating first
+      accounts-java-lambda-dcs-ecp-id-mapper: default
+      accounts-java-lambda-loyalty-sessionm: default
+      accounts-java-lambda-profile-bulk-update: default # dependant on accounts-java-container-profile-bulk-update
+      accounts-java-lambda-real-time-auth-proxy: default
+      accounts-java-lambda-springboot-acs-events-proxy: default
+      accounts-java-lambda-springboot-crds-target-proxy: default
+      accounts-java-lambda-unfreeze-scheduler: default
+      accounts-mule-cloudhub-proxy-address-exp-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-address-prc-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-ccpadaptor-exp-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-cim-accounts-transformation: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-cim-batch-processing: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-deliverylink-exp-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-deliverylink-prc-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-deliverylink-sys-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-event-exp-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-favorite-exp-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-favorite-prc-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-identity-exp-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-identity-exp-api-r7: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-identity-prc-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-identity-prc-api-r7: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-profile-admin-exp-api: bugfix-push-button-deploy
+      accounts-mule-cloudhub-proxy-profile-exp-api: bugfix-profilepbdvc01us  # deploy bugfix/push-button-deploy branch artifact
+      accounts-mule-onprem-app-favorite: bugfix-push-button-deploy #heavily manual activities required
+      accounts-mule-onprem-app-identity: bugfix-push-button-deploy #heavily manual activities required
+      accounts-mule-onprem-app-profile: bugfix-push-button-deploy #heavily manual activities required
+
+Menu:
+  Deployment:
+    All:
+      menu-mule-cloudhub-proxy-market-configuration-exp-api: default
+      menu-mule-cloudhub-proxy-market-configuration-sys-api: default
+      menu-mule-cloudhub-proxy-menu-exp-api: default
+      menu-mule-cloudhub-proxy-menu-sys-api: default
+Orders:
+  Infrastructure:
+    Infrastructure:
+      otr-terraform-orderms-infrastructure: default
+    Infrastructure Lambdas:
+      otr-dotnetcore-container-orderms: default
+      otr-dotnetcore-container-totalizems: default #Job failed, deployed but health checks causing failure
+  Deployment:
+    Middleware:
+      otr-mule-cloudhub-proxy-delivery-exp-api: default #Reading from cores config file, need to look at moving to Orders. Values have been hardcoded, need to be templatized.
+      otr-mule-cloudhub-proxy-delivery-sys-api: default #Reading from cores config file, need to look at moving to Orders. Values have been hardcoded, need to be templatized.
+      otr-mule-cloudhub-proxy-orders-exp-api: default #Reading from cores config file, need to look at moving to Orders. Values have been hardcoded, need to be templatized.
+      otr-mule-cloudhub-proxy-orders-sys-api: default #Reading from cores config file, need to look at moving to Orders. Values have been hardcoded, need to be templatized.
+      otr-mule-cloudhub-proxy-payment-proxy-api: default #Values have been hardcoded, need to be templatized. Redis endpoint probably wrong.
+    Backend:
+      otr-dotnet-lambda-notification: default
+      otr-dotnetcore-container-loyalt-integration-ms: default
+    Utilities:
+      otr-dotnetcore-container-mocks: default
+#     otr-dotnetcore-container-loyalt-restaurant-proxy-mock: default # durable-f2e53d43/script.sh: line 62: unexpected EOF while looking for matching `"'
+      otr-dotnetcore-container-loyalt-sessionm-mock: default
+      otr-dotnetcore-container-restaurantemulator: bugfix-push-button-deploy
+      otr-dotnetcore-container-e2e-tests: default
+      otr-dotnetcore-container-order-k8s-tools: default #Failed due to not being able to read describe_pods.txt
+      otr-dotnetcore-container-e2e-tests: default
+Offers: # NB. TAGGING ERROR for all tagging env hard-coded in terraform so temporary regex fixed applied in DEV
+  Deployment:
+    DEP1:
+      offers-dotnetcore-container-wallet: default
+    DEP2:
+      offers-dotnetcore-container-details: default # release-candidate-1.6-307c13
+    DEP3:
+      offers-dotnetcore-container-randomcode: default
+    DEP4:
+      offers-dotnet-lambda-wallet-reporting: default

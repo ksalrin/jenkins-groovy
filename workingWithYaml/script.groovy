@@ -7,23 +7,45 @@ Yaml parser = new Yaml()
 
 @Field Map nonProdYamlFile = new HashMap()
 nonProdYamlFile = parser.load(("workingWithYaml/non-prod-WORKS.yaml" as File).text)
-
-def functionListOfRepo() {
-  ArrayList arrayList = []
-
-  nonProdYamlFile.Core.Deployment.GLS_Pre.each() {
-    def repoMap = [:]
-    repoMap['repo'] = it.toString().split('=')[0]
-    repoMap['branch'] =  it.toString().split('=')[1]
-
-    arrayList.add(repoMap)
+def loopThroughMethod(inputBitBucketKey, inputMap) {
+  ArrayList repoArrayList = []
+  inputMap.each() {
+    it.each() {
+      for(entry in it){
+        entry.value.each() {
+          def repoMap = [:]
+          repoMap['bitbucketkey'] = inputBitBucketKey
+          repoMap['repo'] = it.toString().split('=')[0]
+          repoMap['branch'] = it.toString().split('=')[1]
+          repoArrayList.add(repoMap)
+        }
+      }
+    }
   }
-  return arrayList
+  return repoArrayList
 }
 
-def repoMap = functionListOfRepo()
 
-repoMap.each() {
-  println(it.get('repo'))
-  println(it.get('branch'))
+def getTemplates() {
+  Yaml parser = new Yaml()
+  def manifest =  parser.load(("workingWithYaml/non-prod-WORKS.yaml" as File).text)
+  ArrayList repoArrayList = []
+
+  repoArrayList.add(loopThroughMethod("CORE", manifest.Core.Deployment))
+  repoArrayList.add(loopThroughMethod("ACCOUNT", manifest.Account.Infrastructure))
+  repoArrayList.add(loopThroughMethod("ACCOUNT", manifest.Account.Deployment))
+  repoArrayList.add(loopThroughMethod("MENU", manifest.Menu.Deployment))
+  repoArrayList.add(loopThroughMethod("OTR", manifest.Orders.Infrastructure))
+  repoArrayList.add(loopThroughMethod("OTR", manifest.Orders.Deployment))
+  repoArrayList.add(loopThroughMethod("OFFERS", manifest.Offers.Deployment))
+
+  return repoArrayList
+}
+
+project = getTemplates()
+
+project.each() {
+  it.each() {
+    println(it)
+  }
 }

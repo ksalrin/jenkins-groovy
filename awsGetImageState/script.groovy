@@ -1,4 +1,8 @@
+// Importing Json library 
 import groovy.json.JsonSlurper
+
+
+// Example json string data 
 data = """
 {
     "Images": [
@@ -26,6 +30,7 @@ data = """
 }
 """
 
+// 
 def myJsonreader = new JsonSlurper()
 
 def data = myJsonreader.parseText(data).Images.State[0]

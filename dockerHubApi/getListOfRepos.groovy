@@ -28,3 +28,4 @@ def findDockerImages(nameApp) {
 }
 
 println(findDockerImages('fuchicorp-monitor'))
+println(findDockerImages('buildtools'))

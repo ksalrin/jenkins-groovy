@@ -24,28 +24,41 @@ def getTeamId(teamName) {
       teamId = it.id
     }
   }
-
   return teamId
 }
 
 
 def getTeamMembers(teamName) {
-
   /*
   Function to find team members from github
   */
-
   def getTeamId = getTeamId(teamName)
-  def memberUrl = "https://api.github.com/teams/${getTeamId}/members"
-  def get = new URL(memberUrl).openConnection();
+  println(getTeamId)
+  def totalUsers = []
+  def memberUrl = ""
+  def pageCount = 1
+
+  while (true) {
+    // While loop to go each pages and get all members from team 
+    memberUrl = "https://api.github.com/teams/${getTeamId}/members?page=${pageCount}"
+    def get = new URL(memberUrl).openConnection();
       get.setRequestMethod("GET")
       get.setRequestProperty("Authorization", "token ${gitToken}")
       get.setRequestProperty("Content-Type", "application/json")
+     def object = jsonSlurper.parseText(get.getInputStream().getText())
 
-  def object = jsonSlurper.parseText(get.getInputStream().getText())
-  return object.login
+    //  Braking the while loop when no one found in the page
+     if (! object.login) {
+       break;
+     }
 
+    // Adding list of found people to totalUsers
+    object.login.each{ totalUsers.add(it) }
+    pageCount = pageCount + 1
+  }
+  return totalUsers
 }
+
 
 println("DevOps Members: ${getTeamMembers('devops')}")
 // println("Admin Members: ${getTeamMembers('admin')}")

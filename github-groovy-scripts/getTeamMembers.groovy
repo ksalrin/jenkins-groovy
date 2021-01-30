@@ -60,6 +60,6 @@ def getTeamMembers(teamName) {
 }
 
 
-println("DevOps Members: ${getTeamMembers('devops')}")
+println("DevOps Members: ${getTeamMembers('fuchicorp-jenkins-admin')}")
 // println("Admin Members: ${getTeamMembers('admin')}")
 // println("Members: ${getTeamMembers('members')}")

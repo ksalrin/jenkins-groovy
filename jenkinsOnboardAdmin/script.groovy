@@ -17,6 +17,4 @@ if (googleDomainName == 'fuchicorp.com') {
 }
 
 
-
-
 println("list of jenkins admins {$jenkinsAdmin}" )
